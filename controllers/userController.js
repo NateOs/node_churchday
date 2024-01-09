@@ -60,10 +60,20 @@ const updateUserPassword = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "Success! Password Updated." });
 };
 
+const deleteUser = async (req, res) => {
+  console.log(req.params);
+  const userId = req.params.id;
+
+  const deletedUser = await User.findByIdAndDelete(userId);
+
+  res.status(StatusCodes.OK).json({ msg: `${userId} deleted successfully` });
+};
+
 module.exports = {
   getAllUsers,
   getSingleUser,
   showCurrentUser,
   updateUser,
   updateUserPassword,
+  deleteUser,
 };
