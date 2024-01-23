@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 const { toDate } = require("validator");
 
-const ChurchdaySchema = mongoose.Schema({
+const
+	ServiceSchema = mongoose.Schema({
+  service_type:[],
+  service_type: { type: String, required: true },
+  start_time: { type: Date },
+  end_time: { type: Date },
+  location: { type: String, required: true },
   attendance: {
     type: Number,
     required: true,
@@ -21,5 +27,5 @@ const ChurchdaySchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Churchday", ChurchdaySchema);
+module.exports = mongoose.model("Churchday", ServiceSchema);
 
