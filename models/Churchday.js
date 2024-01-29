@@ -4,8 +4,8 @@ const { toDate } = require("validator");
 const ChurchdaySchema = mongoose.Schema({
   attendance: {
     type: Number,
-    required: true,
-  } /* shd be updated everytime a new item is inserted in Attendance schema */,
+    required: false,
+  } /*TODO  shd be updated everytime a new item is inserted in Attendance schema */,
   speaker: { type: String },
   comment: { type: String },
   owner: {

@@ -4,10 +4,20 @@ const {
   authenticateUser,
   authorizePermissions,
 } = require("../middleware/authentication");
-const { getAllChurchdays } = require("../controllers/churchdayController");
+
+const {
+  getAllChurchdays,
+  createChurchday,
+} = require("../controllers/churchdayController");
 
 router
   .route("/")
   .get(authenticateUser, authorizePermissions("admin"), getAllChurchdays);
+
+router
+  .route("/")
+  .post(
+   // authenticateUser, authorizePermissions("admin"),
+    createChurchday);
 
 module.exports = router;
