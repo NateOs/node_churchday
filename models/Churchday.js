@@ -7,7 +7,6 @@ const ChurchdaySchema = mongoose.Schema({
     required: true,
   } /* shd be updated everytime a new item is inserted in Attendance schema */,
   speaker: { type: String },
-  theme: { type: String },
   comment: { type: String },
   owner: {
     type: mongoose.Schema.ObjectId,
@@ -22,4 +21,3 @@ const ChurchdaySchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model("Churchday", ChurchdaySchema);
-
