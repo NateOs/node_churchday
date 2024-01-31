@@ -12,8 +12,28 @@ const createChurchday = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ churchday });
 };
 
+//TODO get a churchday
+const getChurchday = async (req, res) => {
+  const id = req.params.id;
+  res.status(StatusCodes.OK).json({ msg: `${id}, get churchday` });
+};
+
+//TODO delete a churchday
+const deleteChurchday = async (req, res) => {
+  const id = req.params.id;
+  res.status(StatusCodes.OK).json({ msg: `${id}, delete churchday` });
+};
+//TODO update a churchday
+const updateChurchday = async (req, res) => {
+  const id = req.params.id;
+  res.status(StatusCodes.OK).json({ msg: `${id}, update churchday` });
+};
+
 
 module.exports = {
   getAllChurchdays,
+  getChurchday,
   createChurchday,
+  deleteChurchday,
+  updateChurchday,
 };
