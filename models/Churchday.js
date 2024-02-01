@@ -8,6 +8,21 @@ const ChurchdaySchema = mongoose.Schema({
   } /*TODO  shd be updated everytime a new item is inserted in Attendance schema */,
   speaker: { type: String },
   comment: { type: String },
+  service_type: {
+    type: String,
+    required: [false, "enter the type of church service, eg. Christmas service"],
+    enum: {
+      values: [
+        "christmas",
+        "sunday",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "easter",
+      ],
+      message: "{VALUE is not supported}",
+    },
+  },
   owner: {
     type: mongoose.Schema.ObjectId,
     ref: "User",

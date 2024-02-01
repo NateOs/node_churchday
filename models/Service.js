@@ -2,21 +2,7 @@ const mongoose = require("mongoose");
 const { toDate } = require("validator");
 
 const ServiceSchema = mongoose.Schema({
-  service_type: {
-    type: String,
-    required: [true, "enter the type of church service, eg. Christmas service"],
-    enum: {
-      values: [
-        "Christmas",
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Easter",
-      ],
-      message: "{VALUE is not supported}",
-    },
-  },
+
   start_time: { type: Date },
   end_time: { type: Date },
   location: { type: String, required: true },

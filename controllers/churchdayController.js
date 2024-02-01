@@ -4,7 +4,11 @@ const { checkPermissions } = require("../utils");
 const Churchday = require("../models/Churchday");
 
 const getAllChurchdays = async (req, res) => {
-  res.send("calls returned");
+  const churchdays = await Churchday.find({});
+  if (!churchdays) {
+    res.status(StatusCodes.NOT_FOUND).json({ msg: "no churchdays found" });
+  }
+  res.status(StatusCodes.OK).json({ hits: churchdays.length, churchdays });
 };
 
 const createChurchday = async (req, res) => {
@@ -12,23 +16,51 @@ const createChurchday = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ churchday });
 };
 
-//TODO get a churchday
 const getChurchday = async (req, res) => {
   const id = req.params.id;
-  res.status(StatusCodes.OK).json({ msg: `${id}, get churchday` });
+  if (!id) {
+    throw new CustomError(StatusCodes.BAD_REQUEST, "id is required");
+  }
+  const churchday = await Churchday.findById(id);
+  if (!churchday) {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ msg: "churchday with id " + id + " does not exist" });
+  }
+  res.status(StatusCodes.OK).json({ churchday });
 };
 
-//TODO delete a churchday
 const deleteChurchday = async (req, res) => {
   const id = req.params.id;
-  res.status(StatusCodes.OK).json({ msg: `${id}, delete churchday` });
-};
-//TODO update a churchday
-const updateChurchday = async (req, res) => {
-  const id = req.params.id;
-  res.status(StatusCodes.OK).json({ msg: `${id}, update churchday` });
+  if (!id) {
+    throw new CustomError(StatusCodes.BAD_REQUEST, "id is required");
+  }
+  const churchday = await Churchday.findByIdAndDelete(id);
+  if (!churchday) {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ msg: "churchday with id " + id + " does not exist" });
+  }
+  res.status(StatusCodes.OK).json({ churchday });
 };
 
+const updateChurchday = async (req, res) => {
+  const id = req.params.id;
+  if (!id) {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ msg: "item with id " + id + " does not exist" });
+    const churchday = await Churchday.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    if (!churchday) {
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ msg: "churchday with id " + id + " does not exist" });
+    }
+    res.status(StatusCodes.OK).json({ churchday });
+  }
+};
 
 module.exports = {
   getAllChurchdays,
