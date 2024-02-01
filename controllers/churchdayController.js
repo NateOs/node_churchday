@@ -6,7 +6,9 @@ const Churchday = require("../models/Churchday");
 const getAllChurchdays = async (req, res) => {
   const churchdays = await Churchday.find({});
   if (!churchdays) {
-    res.status(StatusCodes.NOT_FOUND).json({ msg: "no churchdays found" });
+    throw new CustomError.NotFoundError(
+      "churchday with id " + id + " does not exist",
+    );
   }
   res.status(StatusCodes.OK).json({ hits: churchdays.length, churchdays });
 };
@@ -23,9 +25,9 @@ const getChurchday = async (req, res) => {
   }
   const churchday = await Churchday.findById(id);
   if (!churchday) {
-    res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ msg: "churchday with id " + id + " does not exist" });
+    throw new CustomError.NotFoundError(
+      "churchday with id " + id + " does not exist",
+    );
   }
   res.status(StatusCodes.OK).json({ churchday });
 };
@@ -50,16 +52,18 @@ const updateChurchday = async (req, res) => {
     res
       .status(StatusCodes.NOT_FOUND)
       .json({ msg: "item with id " + id + " does not exist" });
-    const churchday = await Churchday.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
-    if (!churchday) {
-      res
-        .status(StatusCodes.NOT_FOUND)
-        .json({ msg: "churchday with id " + id + " does not exist" });
-    }
-    res.status(StatusCodes.OK).json({ churchday });
   }
+
+  const churchday = await Churchday.findByIdAndUpdate(id, req.body, {
+    new: true,
+  });
+
+  if (!churchday) {
+    throw new CustomError.NotFoundError(
+      "churchday with id " + id + " does not exist",
+    );
+  }
+  res.status(StatusCodes.OK).json({ churchday });
 };
 
 module.exports = {
