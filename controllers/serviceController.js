@@ -73,7 +73,6 @@ const updateService = async (req, res) => {
   });
 };
 
-/* TODO delete a service */
 const deleteService = async (req, res) => {
   const id = req.params.id;
   if (!id) {
@@ -85,8 +84,10 @@ const deleteService = async (req, res) => {
       "service with id " + id + " does not exist",
     );
   }
-  await service.remove();
-  res.send("delete a service");
+  const deletedService = await service.remove();
+  res
+    .status(StatusCodes.OK)
+    .send({ msg: "deleted successfully", service: deletedService });
 };
 
 module.exports = {
