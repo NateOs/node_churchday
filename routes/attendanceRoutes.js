@@ -5,10 +5,19 @@ const {
   authorizePermissions,
 } = require("../middleware/authentication");
 
-const { getAllAttendance } = require("../controllers/attendanceController");
+const {
+  getAllAttendance,
+  createAttendance,
+  deleteAttendance,
+} = require("../controllers/attendanceController");
 
 router
   .route("/")
-  .get(authenticateUser, authorizePermissions("admin"), getAllAttendance);
+  .get(authenticateUser, authorizePermissions("admin"), getAllAttendance)
+  .post(authenticateUser, authorizePermissions("admin"), createAttendance);
+
+router
+  .route("/:id")
+  .delete(authenticateUser, authorizePermissions("admin"), deleteAttendance);
 
 module.exports = router;
