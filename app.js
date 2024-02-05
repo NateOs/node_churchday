@@ -23,6 +23,7 @@ const userRouter = require("./routes/userRoutes");
 const churchdayRouter = require("./routes/churchdayRoutes");
 const serviceRouter = require("./routes/serviceRoutes");
 const attendanceRouter = require("./routes/attendanceRoutes");
+const memberRouter = require("./routes/memberRoutes");
 
 // middleware
 const notFoundMiddleware = require("./middleware/not-found");
@@ -51,6 +52,7 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/churchday", churchdayRouter);
 app.use("/api/v1/services", serviceRouter);
 app.use("/api/v1/attendance", attendanceRouter);
+app.use("/api/v1/member", memberRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { toDate } = require("validator");
 
-const ChurchdaySchema = mongoose.Schema({
+const MemberSchema = mongoose.Schema({
   surname: { type: String, required: true },
   other_names: { type: String, required: true },
   age: { type: Number },
@@ -10,10 +10,10 @@ const ChurchdaySchema = mongoose.Schema({
   phone: { type: String, required: false },
   email: { type: String, required: true },
   address: { type: String, required: true },
-  marital: {
+  marital_status: {
     type: String,
     required: [true, "Please enter marital status"],
-    enum: ["office", "kitchen", "bedroom"],
+    enum: ["married", "single", "divorced", "separated"],
   },
   number_of_children: { type: Number, required: false },
   spouse_name: { type: String, required: false },
@@ -35,4 +35,4 @@ const ChurchdaySchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Churchday", ChurchdaySchema);
+module.exports = mongoose.model("Member", MemberSchema);
