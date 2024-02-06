@@ -25,5 +25,6 @@ router
 router
   .route("/:id")
   .patch(authenticateUser, authorizePermissions("admin"), updateMember)
+  .get(authenticateUser, authorizePermissions("admin"), getMember)
   .delete(authenticateUser, authorizePermissions("admin"), deleteMember);
 module.exports = router;
