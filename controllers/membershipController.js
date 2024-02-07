@@ -32,6 +32,11 @@ const getMember = async (req, res) => {
   res.status(StatusCodes.OK).send({ member });
 };
 
+const getAllMembers = async (req, res) => {
+  const members = await Member.find({});
+  res.status(StatusCodes.OK).send({ hits: members.length, members });
+};
+
 const updateMember = async (req, res) => {
   res.status(StatusCodes.OK).send("update member");
 };
@@ -40,4 +45,10 @@ const deleteMember = async (req, res) => {
   res.status(StatusCodes.OK).send("delete member");
 };
 
-module.exports = { createMember, getMember, deleteMember, updateMember };
+module.exports = {
+  createMember,
+  getMember,
+  getAllMembers,
+  deleteMember,
+  updateMember,
+};

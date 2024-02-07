@@ -6,6 +6,7 @@ const { authenticateUser } = require("../middleware/authentication");
 const {
   createMember,
   getMember,
+  getAllMembers,
   updateMember,
   deleteMember,
 } = require("../controllers/membershipController");
@@ -15,6 +16,7 @@ router
   .get(
     authenticateUser,
     authorizePermissions("admin"),
+    getAllMembers,
     getMember,
     createMember,
     deleteMember,
