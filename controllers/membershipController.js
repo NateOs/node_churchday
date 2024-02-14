@@ -38,11 +38,37 @@ const getAllMembers = async (req, res) => {
 };
 
 const updateMember = async (req, res) => {
-  res.status(StatusCodes.OK).send("update member");
+  const id = req.params.id;
+  if (!id) {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ msg: "item with id " + id + " does not exist" });
+  }
+  const member = await Member.findByIdAndUpdate(id, req.body, {
+    new: true,
+  });
+  if (!member) {
+    throw new CustomError.NotFoundError(
+      "member with id " + id + " does not exist",
+    );
+  }
+  res.status(StatusCodes.OK).json({ member });
 };
 
 const deleteMember = async (req, res) => {
-  res.status(StatusCodes.OK).send("delete member");
+  const id = req.params.id;
+  if (!id) {
+    throw new CustomError(StatusCodes.BAD_REQUEST, "id is required");
+  }
+  const member = await Member.findByIdAndDelete(id);
+  if (!member) {
+    throw new CustomError.NotFoundError(
+      "member with id " + id + " does not exist",
+    );
+  }
+  res
+    .status(StatusCodes.OK)
+    .json({ msg: "member deleted successfully", member });
 };
 
 module.exports = {
