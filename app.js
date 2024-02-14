@@ -58,7 +58,9 @@ const htmlContent = `
 </head>
 <body>
   <h1>churchday server is up and running!</h1>
-  <a href="/api/v1/auth/login">here for docs!</a>
+  <a href="
+  https://app.getpostman.com/join-team?invite_code=da95b69bacd375be1fa7565a19ccf08a&target_code=9773a029bef2252ec49b850d826b5164
+  ">here for docs!</a>
   // put postman docs here
 </body>
 </html>
