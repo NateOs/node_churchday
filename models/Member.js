@@ -36,3 +36,5 @@ const MemberSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model("Member", MemberSchema);
+
+// TODO create id field that is generated, format PJMT001...
