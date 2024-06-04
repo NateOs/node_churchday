@@ -8,7 +8,6 @@ const {
 } = require("../utils");
 
 const getAllUsers = async (req, res) => {
-  console.log(req.user);
   const users = await User.find({ role: "user" }).select("-password"); //admin will not be returned
   res.status(StatusCodes.OK).json({ users });
 };
@@ -27,7 +26,6 @@ const showCurrentUser = async (req, res) => {
 };
 // update user with user.save()
 const updateUser = async (req, res) => {
-  console.log("req.user, " + req.user);
 
   const { email, name } = req.body;
   if (!email || !name) {
@@ -61,7 +59,6 @@ const updateUserPassword = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  console.log(req.params);
   const userId = req.params.id;
 
   const deletedUser = await User.findByIdAndDelete(userId);

@@ -45,7 +45,6 @@ const register = async (req, res) => {
     verificationToken: verificationToken,
   });
 
-  console.log(verificationToken);
 };
 
 const login = async (req, res) => {
@@ -55,7 +54,6 @@ const login = async (req, res) => {
     throw new CustomError.BadRequestError("Please provide email and password");
   }
   user = await User.findOne({ email });
-  console.log(user);
 
   if (!user) {
     throw new CustomError.UnauthenticatedError("Invalid Credentials");
@@ -103,8 +101,6 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  console.log(user);
-  console.log(req.user);
   await Token.findOneAndDelete({ user: user.userId });
   res.cookie("accessToken", "logout", {
     httpOnly: true,

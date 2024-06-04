@@ -13,7 +13,7 @@ const sendEmail = async ({ to, subject, html }) => {
     html,
   });
 
-  console.log(info);
+  // console.log(info);
 };
 
 module.exports =  sendEmail ;
